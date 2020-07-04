@@ -29,7 +29,7 @@ app.get('/notes', (req, res) => {
     
 
 //API routes
-app.get(`/api/notes`,  (req, res) => {
+app.get(`/api/notes`, (req, res) => {
      // Read the `db.json` file and return all saved notes as JSON
     res.json(db);
 });
@@ -41,7 +41,9 @@ app.post('/api/notes', (req, res) => {
     //pushing new note to db
     db.push(newNote);
     fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(db), (err) => {
-        if(err) {throw err;} 
+        if (err) {
+            throw err;
+        } 
     });
     res.json(db);  
 });
@@ -57,17 +59,19 @@ app.delete(`/api/notes/:id`, (req, res) => {
                 return note.id != id;
         });
         fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(db), (err) => {
-            if(err) {throw err;}
+            if  (err) {
+                throw err;
+            }
         });
         return res.json(db);  
         }
     };
-    return  res.json(false);  
+    return res.json(false);  
 });
 
 
 
-//SERVER LISTEN
+//Server listener
 app.listen(PORT, () => {
     console.log("App listening on PORT: " + PORT);
 })
