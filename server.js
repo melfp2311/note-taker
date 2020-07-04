@@ -7,12 +7,12 @@ const fs = require('fs');
 let db = require('./db/db.json');
 
 //Chosen port and express activated
-var app = express();
 var PORT = process.env.PORT || 8080;
+var app = express();
 
 
 //creating connections to use
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 //for things running on the frontend
 app.use(express.static(__dirname + '/public'));
@@ -20,11 +20,11 @@ app.use(express.static(__dirname + '/public'));
 //Routing
 //HTML routes
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../public/index.html'))
+    res.sendFile(path.join(__dirname, './public/index.html'))
 });
 
 app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../public/notes.html'));
+    res.sendFile(path.join(__dirname, './public/notes.html'));
 });
     
 //API routes
