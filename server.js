@@ -39,7 +39,7 @@ app.post('api/notes', (req, res) => {
     let newNote = req.body;
     //pushing new note to db
     db.push(newNote);
-    fs.writeFile(path.join(__dirname, "../db/db.json"), JSON.stringify(db), (err) => {
+    fs.writeFile(path.join(__dirname, "./db/db.json"), JSON.stringify(db), (err) => {
         if(err) throw err;  
     });
     res.json(db);  
@@ -55,7 +55,7 @@ app.delete('api/notes', (req, res) => {
             db = db.filter((note) => {
                 return note.id != id;
         });
-        fs.writeFile(path.join(__dirname, "../db/db.json"), JSON.stringify(db), (err) => {
+        fs.writeFile(path.join(__dirname, "./db/db.json"), JSON.stringify(db), (err) => {
             if(err) throw err;  
         });
         return res.json(db);  
