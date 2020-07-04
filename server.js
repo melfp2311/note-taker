@@ -27,26 +27,27 @@ app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, './public/notes.html'));
 });
     
+
 //API routes
-app.get('/api/notes',  (req, res) => {
+app.get(`/api/notes`,  (req, res) => {
      // Read the `db.json` file and return all saved notes as JSON
     res.json(db);
 });
 
 //to add a note  to the db.json
-app.post('api/notes', (req, res) => {
+app.post('/api/notes', (req, res) => {
     //receiving new note
     let newNote = req.body;
     //pushing new note to db
     db.push(newNote);
-    fs.writeFile(path.join(__dirname, "./db/db.json"), JSON.stringify(db), (err) => {
-        if(err) throw err;  
+    fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(db), (err) => {
+        if(err) {throw err;} 
     });
     res.json(db);  
 });
 
 //to delete a note from the db.json
-app.delete('api/notes', (req, res) => {
+app.delete(`/api/notes/:id`, (req, res) => {
     //receiving the note id as a parameter 
     let id = req.params.body;
     //looking and deleting a specific id  
@@ -55,8 +56,8 @@ app.delete('api/notes', (req, res) => {
             db = db.filter((note) => {
                 return note.id != id;
         });
-        fs.writeFile(path.join(__dirname, "./db/db.json"), JSON.stringify(db), (err) => {
-            if(err) throw err;  
+        fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(db), (err) => {
+            if(err) {throw err;}
         });
         return res.json(db);  
         }
